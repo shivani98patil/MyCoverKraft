@@ -1,9 +1,53 @@
 import streamlit as st
-import os
 import openai as ai
 from PyPDF2 import PdfReader
+import logging
+import io
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+logging.basicConfig(level=logging.INFO)
+
+nltk.download('punkt')
+nltk.download('stopwords')
 
 ai.api_key = st.secrets["openai_key"]
+
+def extract_text_from_pdf(pdf_file):
+    try:
+        pdf_reader = PdfReader(io.BytesIO(pdf_file.getvalue()))
+        extracted_text = ""
+        for page in pdf_reader.pages:
+            extracted_text += page.extract_text() + "\n"
+        return extracted_text.strip()
+    except Exception as e:
+        st.error(f"Error reading PDF file: {str(e)}")
+        return ""
+
+def save_feedback_to_file(user_name, feedback):
+    try:
+        with open("feedback_data.csv", "a") as file:
+            file.write(f"{user_name},{feedback}\n")
+        logging.info("Feedback saved successfully")
+    except Exception as e:
+        logging.error("Error saving feedback: " + str(e))
+        st.error("An error occurred while saving feedback.")
+
+def extract_keywords(text):
+    stop_words = set(stopwords.words('english'))
+    word_tokens = word_tokenize(text)
+    keywords = [word for word in word_tokens if word.isalpha() and word not in stop_words]
+    return set(keywords)
+
+# Function to calculate match percentage
+def calculate_match(resume_keywords, job_desc_keywords):
+    match_keywords = resume_keywords.intersection(job_desc_keywords)
+    total_keywords = len(job_desc_keywords)
+    if total_keywords == 0:
+        return 0
+    match_percentage = len(match_keywords) / total_keywords * 100
+    return match_percentage, match_keywords
 
 st.markdown("""
 # 📝 AI-Powered Cover Letter Generator
