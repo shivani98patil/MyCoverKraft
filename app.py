@@ -51,8 +51,7 @@ def calculate_match(resume_keywords, job_desc_keywords):
 
 st.markdown("# 📝 MyCoverKraft - Your Personalized Cover Letter Generator")
 
-tab1, tab2 = st.tabs(["Resume Parser and Editor", "Cover Letter Generator"])
-
+tab1, tab2, tab3 = st.tabs(["Resume Parser and Editor", "Cover Letter Generator", "Resume and Job Description Keyword Matcher"])
 
 if 'cover_letter_generated' not in st.session_state:
     st.session_state.cover_letter_generated = False
@@ -212,3 +211,44 @@ with tab2:
             save_feedback_to_file(user_name, feedback)
             st.success("Thank you for your feedback!")
             st.session_state.feedback_submitted = True
+
+with tab3:
+    st.title("Resume and Job Description Keyword Matcher")
+    with st.expander("Instructions"):
+        st.write("""
+                    - Fields marked with an asterisk (*) are mandatory.
+                    - Upload your resume or copy your resume/experiences.
+                    - Paste a relevant job description.
+                    - Input other relevant data.
+                    - Choose a cover letter style.
+                """)
+    # radio for upload or copy paste option
+    resume_input_method = st.radio(
+        "Choose how to input your resume:",
+        ('Upload PDF', 'Paste Text'),
+        key='resume_input_method'
+    )
+
+    resume_text = ""
+    if resume_input_method == 'Upload PDF':
+        uploaded_file = st.file_uploader("Upload your resume* ", type="pdf", key='resume_uploader')
+        if uploaded_file:  # Check if the file is uploaded
+            resume_text = extract_text_from_pdf(uploaded_file)
+    elif resume_input_method == 'Paste Text':
+        resume_text = st.text_area("Paste Your Resume Here", height=200, key='resume_textarea')
+
+    job_desc_text = st.text_area("Paste the Job Description", height=200)
+
+    if st.button('Match Keywords'):
+        if resume_text and job_desc_text:
+            # Extract keywords
+            resume_keywords = extract_keywords(resume_text.lower())
+            job_desc_keywords = extract_keywords(job_desc_text.lower())
+
+            # Calculate match
+            match_percentage, matched_keywords = calculate_match(resume_keywords, job_desc_keywords)
+
+            st.write(f"Match Percentage: {match_percentage:.2f}%")
+            st.write("Matched Keywords:", matched_keywords)
+        else:
+            st.error("Please input both the resume and the job description.")
