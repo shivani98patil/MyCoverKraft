@@ -174,9 +174,9 @@ with tab2:
         pdf.add_page()
         pdf.set_font("Arial", size=12)
         pdf.multi_cell(0, 10, response_out)
+        pdf_output = pdf.output(dest='S')  # 'S' returns the PDF as a string
         buffer = BytesIO()
-        pdf.output(dest='S').encode('latin1')  # 'S' returns the PDF as a string
-        buffer.write(pdf.output(dest='S').encode('latin1'))
+        buffer.write(pdf_output.encode('latin-1'))  # Encode the string into bytes
         buffer.seek(0)
         return buffer.getvalue()
 
@@ -279,7 +279,6 @@ with tab2:
                 st.session_state.cover_letter_generated = True
 
             except Exception as e:
-                logging.error("Error in cover letter generation: " + str(e))
                 st.error("An error occurred while generating the cover letter.")
         else:
             st.error("Please fill in all the required fields.")
