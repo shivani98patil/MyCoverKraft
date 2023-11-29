@@ -1,11 +1,15 @@
 import streamlit as st
 import openai as ai
+from docx import Document
+from fpdf import FPDF
 from PyPDF2 import PdfReader
+from io import BytesIO
 import logging
 import io
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+from datetime import date
 
 logging.basicConfig(level=logging.INFO)
 
@@ -146,63 +150,155 @@ with tab2:
             submitted = st.form_submit_button("Generate Cover Letter")
 
 
-    if submitted and res_text and job_desc and user_name and company and role:
-        try:
+    def get_state():
+        if 'state' not in st.session_state:
+            st.session_state['state'] = AppState()
+        return st.session_state['state']
 
-            customization_prompt = f"""
-            Tone: {tone.lower()}
-            Achievements/Skills: {achievements}
-            Structure: {letter_structure.lower()}
-            """
-            completion = ai.ChatCompletion.create(
-            model = "gpt-3.5-turbo",
-            temperature=0.99,
-            messages = [
-                {"role": "user", "content" : f"You will need to generate a cover letter based on specific resume and a job description"},
-                {"role": "user", "content" : f"My resume text: {res_text}"},
-                {"role": "user", "content" : f"The job description is: {job_desc}"},
-                {"role": "user", "content" : f"The candidate's name to include on the cover letter: {user_name}"},
-                {"role": "user", "content" : f"The job title/role : {role}"},
-                {"role": "user", "content" : f"The hiring manager is: {manager}"},
-                {"role": "user", "content" : f"How you heard about the opportunity: {referral}"},
-                {"role": "user", "content" : f"The company to which you are generating the cover letter for: {company}"},
-                {"role": "user", "content": customization_prompt},
-                {"role": "user", "content" : f"The cover letter should have three content paragraphs"},
-                {"role": "user", "content" : f""" 
-                In the first paragraph focus on the following: you will convey who you are, what position you are interested in, and where you heard
-                about it, and summarize what you have to offer based on the above resume
-                """},
-                    {"role": "user", "content" : f""" 
-                In the second paragraph focus on why the candidate is a great fit drawing parallels between the experience included in the resume 
-                and the qualifications on the job description.
-                """},
-                        {"role": "user", "content" : f""" 
-                In the 3RD PARAGRAPH: Conclusion
-              Restate your interest in the organization and/or job and summarize what you have to offer and thank the reader for their time and consideration.
-                """},
-                {"role": "user", "content" : f""" 
-                note that contact information may be found in the included resume text and use and/or summarize specific resume context for the letter
+
+    def create_text_file(cover_letter):
+        return cover_letter.encode('utf-8')
+
+
+    def create_docx(response_out):
+        doc = Document()
+        doc.add_paragraph(response_out)
+        buffer = BytesIO()
+        doc.save(buffer)
+        buffer.seek(0)
+        return buffer
+
+
+    def create_pdf(response_out):
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Arial", size=12)
+        pdf.multi_cell(0, 10, response_out)
+        buffer = BytesIO()
+        pdf.output(dest='S').encode('latin1')  # 'S' returns the PDF as a string
+        buffer.write(pdf.output(dest='S').encode('latin1'))
+        buffer.seek(0)
+        return buffer.getvalue()
+
+
+    class AppState:
+        def __init__(self):
+            self.file_data1 = None
+            self.file_data2 = None
+            self.file_data3 = None
+
+        def generate_files(self, data):
+            self.file_data1 = create_text_file(data)
+            self.file_data2 = create_docx(data)
+            self.file_data3 = create_pdf(data)
+
+
+    state = get_state()
+
+
+    if submitted :
+        if res_text and job_desc and user_name and company and role:
+            try:
+
+                customization_prompt = f"""
+                Tone: {tone.lower()}
+                Achievements/Skills: {achievements}
+                Structure: {letter_structure.lower()}
+                """
+                completion = ai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    temperature=0.99,
+                    messages=[
+                        {"role": "user",
+                         "content": f"You will need to generate a cover letter based on specific resume and a job description"},
+                        {"role": "user", "content": f"My resume text: {res_text}"},
+                        {"role": "user", "content": f"The job description is: {job_desc}"},
+                        {"role": "user",
+                         "content": f"The candidate's name to include on the cover letter: {user_name}"},
+                        {"role": "user", "content": f"The job title/role : {role}"},
+                        {"role": "user", "content": f"The hiring manager is: {manager}"},
+                        {"role": "user", "content": f"How you heard about the opportunity: {referral}"},
+                        {"role": "user",
+                         "content": f"The company to which you are generating the cover letter for: {company}"},
+                        {"role": "user", "content": customization_prompt},
+                        {"role": "user", "content": f"The cover letter should have three content paragraphs"},
+                        {"role": "user",
+                         "content": "Please replace all placeholders with the specific details provided. For example, replace '[Your Name]' with the user's actual name."},
+                        {"role": "user", "content": f"Do not include {user_name} in the starting"},
+                        {"role": "user", "content": f""" 
+                    In the first paragraph focus on the following: you will convey who you are, what position you are interested in, and where you heard
+                    about it, and summarize what you have to offer based on the above resume
                     """},
-                {"role": "user", "content" : f"Use {user_name} as the candidate"},
+                        {"role": "user", "content": f""" 
+                    In the second paragraph focus on why the candidate is a great fit drawing parallels between the experience included in the resume 
+                    and the qualifications on the job description.
+                    """},
+                        {"role": "user", "content": f""" 
+                    In the 3RD PARAGRAPH: Conclusion
+                  Restate your interest in the organization and/or job and summarize what you have to offer and thank the reader for their time and consideration.
+                    """},
+                        {"role": "user", "content": f""" 
+                    note that contact information may be found in the included resume text and use and/or summarize specific resume context for the letter
+                        """},
+                        {"role": "user", "content": "Use" + user_name + "as the candidate"},
+                        {"role": "user",
+                         "content": "Only put Date before Dear Hiring Manager. Do not include your name and and Company name or any additional information."},
 
-                {"role": "user", "content" : f"Generate a specific cover letter based on the above. Generate the response and include appropriate spacing between the paragraph text"}
-            ]
-            )
+                        {"role": "user",
+                         "content": f"Generate a specific cover letter based on the above. Generate the response and include appropriate spacing between the paragraph text"}
+                    ]
+                )
 
-            response_out = completion['choices'][0]['message']['content']
-            st.write(response_out)
+                response_out = completion['choices'][0]['message']['content']
+                if manager:
+                    response_out = response_out.replace('[Hiring Manager]', manager)
+                else:
+                    response_out = response_out.replace('[Hiring Manager]', 'Hiring Manager')
 
-            st.download_button(
-                label="Download Cover Letter",
-                data=response_out,
-                file_name=user_name + "_cover_letter.txt",
-                mime="text/plain"
-            )
+                response_out = response_out.replace('[Recipient\'s Name]', manager if manager else 'Hiring Manager')
+                response_out = response_out.replace('[Your Name]', user_name if user_name else 'Your Name')
+                response_out = response_out.replace('[Job description*]', job_desc)
+                response_out = response_out.replace('[Company Name]', company)
+                response_out = response_out.replace('[Job Role*]', role)
+                today_date = date.today()
+                today_date_str = today_date.strftime("%B %d, %Y")
+                response_out = response_out.replace('[Today\'s Date]', today_date_str)
+                response_out = response_out.replace('[Today’s Date]', today_date_str)
+                response_out = response_out.replace('[Date]', today_date_str)
+                response_out = response_out.replace('[Company Address]', '')
+                response_out = response_out.replace('[Your Address]', '')
+                response_out = response_out.replace('[City, State, ZIP Code]', '')
+                response_out = response_out.replace('[City, State, ZIP]', '')
+                response_out = response_out.replace('[Email Address]', '')
+                response_out = response_out.replace('[Phone Number]', '')
+                response_out = response_out.replace('[Your Contact Information]', '')
+                response_out = response_out.replace('[How did you find out about this opportunity?]', referral)
 
-            st.session_state.cover_letter_generated = True
-        except Exception as e:
-            logging.error("Error in cover letter generation: " + str(e))
-            st.error("An error occurred while generating the cover letter.")
+                st.write(response_out)
+                state.generate_files(response_out)
+                st.session_state.cover_letter_generated = True
+
+            except Exception as e:
+                logging.error("Error in cover letter generation: " + str(e))
+                st.error("An error occurred while generating the cover letter.")
+        else:
+            st.error("Please fill in all the required fields.")
+
+
+    col1, col2, col3 = st.columns(3)
+
+    if state.file_data1:
+        with col1:
+            st.download_button('Download TXT', state.file_data1, user_name+'_cover_letter.txt', 'text/plain')
+
+    if state.file_data2:
+        with col2:
+            st.download_button('Download DOCX', state.file_data2, user_name+'_cover_letter.docx',
+                               'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+
+    if state.file_data3:
+        with col3:
+            st.download_button('Download PDF', state.file_data3, user_name+'_cover_letter.pdf', 'application/pdf')
 
 
     if st.session_state.cover_letter_generated and not st.session_state.feedback_submitted:
@@ -251,4 +347,4 @@ with tab3:
             st.write(f"Match Percentage: {match_percentage:.2f}%")
             st.write("Matched Keywords:", matched_keywords)
         else:
-            st.error("Please input both the resume and the job description.")
+            st.error("Please input both the resume and the job description.")
