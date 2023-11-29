@@ -55,14 +55,14 @@ def calculate_match(resume_keywords, job_desc_keywords):
 
 st.markdown("# 📝 MyCoverKraft - Your Personalized Cover Letter Generator")
 
-tab1, tab2, tab3 = st.tabs(["Resume Parser and Editor", "Cover Letter Generator", "Resume and Job Description Keyword Matcher"])
+tab1, tab2, tab3 = st.tabs(["Cover Letter Generator", "Resume Parser and Editor", "Resume and Job Description Keyword Matcher"])
 
 if 'cover_letter_generated' not in st.session_state:
     st.session_state.cover_letter_generated = False
 if 'feedback_submitted' not in st.session_state:
     st.session_state.feedback_submitted = False
 
-with tab1:
+with tab2:
     st.title("Resume Parser and Editor")
 
     with st.expander("Instructions"):
@@ -90,7 +90,7 @@ with tab1:
             st.session_state.edited_resume_text = editable_text
             st.success("Resume text updated!")
 
-with tab2:
+with tab1:
     st.markdown("## Cover Letter Generator")
     with st.expander("Instructions"):
         st.write("""
@@ -98,7 +98,6 @@ with tab2:
                     - Upload your resume or copy your resume/experiences.
                     - Paste a relevant job description.
                     - Input other relevant data.
-                    - Choose a cover letter style.
                 """)
     # radio for upload or copy paste option
     res_format = st.radio(
@@ -314,8 +313,6 @@ with tab3:
                     - Fields marked with an asterisk (*) are mandatory.
                     - Upload your resume or copy your resume/experiences.
                     - Paste a relevant job description.
-                    - Input other relevant data.
-                    - Choose a cover letter style.
                 """)
     # radio for upload or copy paste option
     resume_input_method = st.radio(
@@ -330,9 +327,9 @@ with tab3:
         if uploaded_file:  # Check if the file is uploaded
             resume_text = extract_text_from_pdf(uploaded_file)
     elif resume_input_method == 'Paste Text':
-        resume_text = st.text_area("Paste Your Resume Here", height=200, key='resume_textarea')
+        resume_text = st.text_area("Paste Your Resume Here*", height=200, key='resume_textarea')
 
-    job_desc_text = st.text_area("Paste the Job Description", height=200)
+    job_desc_text = st.text_area("Paste the Job Description*", height=200)
 
     if st.button('Match Keywords'):
         if resume_text and job_desc_text:
@@ -343,7 +340,6 @@ with tab3:
             # Calculate match
             match_percentage, matched_keywords = calculate_match(resume_keywords, job_desc_keywords)
 
-            st.write(f"Match Percentage: {match_percentage:.2f}%")
             st.write("Matched Keywords:", matched_keywords)
         else:
             st.error("Please input both the resume and the job description.")
