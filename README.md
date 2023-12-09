@@ -89,48 +89,40 @@ The test file includes the following test cases:
 The tests use mocking to simulate the behavior of external systems like file I/O operations and PDF reading operations. This allows the tests to run quickly and reliably, without depending on the behavior of these external systems.
 
 
-# Acceptance Testing for MyCoverKraft
+# Acceptance Testing: Generating Cover Letter using MyCoverKraft
 
-Use Case: Generate a Cover Letter
+## Use Case Description
 
 This use case involves generating a cover letter using the MyCoverKraft application.
-Execution Steps:
+
+### Execution Steps
 
 1. Open the MyCoverKraft application.
-2. Navigate to the "Resume Parser and Editor" tab.
-3. Upload a PDF resume using the "Upload your resume (PDF format)" button.
-4. Review and edit the extracted text from your resume in the "Edit the text as needed:" text area.
-5. Confirm the edited text by clicking the "Confirm Edited Text" button.
-6. Navigate to the "Cover Letter Generator" tab.
-7. Choose the "Paste" option for the "Resume Input Method".
-8. Paste the confirmed edited text into the "Pasted resume elements" text box.
-9. Select a tone for your cover letter from the "Select the Tone of Your Cover Letter" dropdown.
-10. Enter any specific achievements, skills, or keywords into the "Include Specific Achievements, Skills or Keywords" text box.
-11. Choose a structure for your cover letter from the "Choose Your Cover Letter Structure" radio buttons.
-12. Fill in the rest of the form with the appropriate information (job description, name, company name, hiring manager, job role, and how you found out about the opportunity).
-13. Click the "Generate Cover Letter" button.
+2. Navigate to the "Cover Letter Generator" tab.
+3. Upload a PDF resume using the "Upload" button.
+4. Choose the "Paste" option for the "Resume Input Method".
+5. Enter any specific achievements, skills, or keywords into the "Include Specific Achievements, Skills or Keywords" text box.
+6. Select a tone for your cover letter from the "Choose Your Cover Letter Structure" radio buttons.
+7. Fill in the rest of the form with the appropriate information (job description, name, company name, hiring manager, job role, and how you found out about the opportunity).
+8. Click the "Generate Cover Letter" button.
 
-#### Expected Output:
+### Expected Output or Behavior
 
-After clicking the "Generate Cover Letter" button, the application should generate a cover letter based on the information you provided. The cover letter should be displayed on the screen, and you should have the option to download it as a TXT, DOCX, or PDF file.
+- The MyCoverKraft application should generate a cover letter based on the provided resume details, additional input (achievements, skills, keywords), and form information.
+- The generated cover letter should display the selected tone and include relevant details as per the form entries.
+- The system should allow users to review the generated cover letter.
 
-The generated cover letter should match the tone and structure you selected, include the specific achievements, skills, or keywords you entered, and be personalized with the information you provided in the form. The cover letter should not include any placeholders (like '[Your Name]') - all placeholders should be replaced with the appropriate information.
+### Example or Screenshot (if available)
 
-If any required fields are left blank, the application should display an error message prompting you to fill in the missing information.
+- If possible, provide a screenshot or example of the generated cover letter displayed after completion.
 
-### Use Case: Resume and Job Description Keyword Matcher
+## Execution Verification
 
-This use case involves matching keywords between a resume and a job description using the MyCoverKraft application.
+The teaching staff will follow the provided steps to:
+- Generate a cover letter using the MyCoverKraft application.
+- Review the generated cover letter to ensure it aligns with the provided resume details and form information.
 
-#### Execution Steps:
+## Postconditions
 
-1. Open the MyCoverKraft application.
-2. Navigate to the "Resume and Job Description Keyword Matcher" tab.
-3. Choose how to input your resume: either upload a PDF resume using the "Upload PDF" option, or paste the resume text using the "Paste Text" option.
-4. Paste the job description into the "Paste the Job Description" text area.
-5. Click the "Match Keywords" button.
-Expected Output:
-
-After clicking the "Match Keywords" button, the application should calculate the match percentage between the keywords in the resume and the job description. The application should display the matched keywords.
-
-If either the resume or the job description is not provided, the application should display an error message prompting you to input both the resume and the job description.
+- Users should have access to a generated cover letter tailored based on the provided resume details and additional input.
+- The system should provide an intuitive and accurate cover letter generation process within the MyCoverKraft application.
