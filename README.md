@@ -136,7 +136,7 @@ This use case involves generating a cover letter using the MyCoverKraft applicat
 
 ## Execution Verification
 
-The teaching staff will follow the provided steps to:
+Follow these steps to:
 - Generate a cover letter using the MyCoverKraft application.
 - Review the generated cover letter to ensure it aligns with the provided resume details and form information.
 
