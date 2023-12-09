@@ -2,21 +2,44 @@
 
 Before running the tests, make sure you have the necessary packages installed. You can install them using pip:
 
-1. Make sure you have Python installed on your system.
+1. **Ensure Python is installed on your system.**
 
-2. Create a virtual environment:
+2. **Create a virtual environment:**
 
-python -m venv venv
+    ```
+    python -m venv venv
+    ```
 
-3. Activate it and install the dependencies:
+3. **Activate the virtual environment and install the dependencies:**
 
-venv\Scripts\activate
+    ```
+    venv\Scripts\activate  # For Windows
+    source venv/bin/activate  # For macOS/Linux
+    pip install -r requirements.txt
+    ```
 
-pip install -r requirements.txt
+4. **Run the project:**
 
-4. Run the project:
+    ```
+    streamlit run app.py
+    ```
 
-streamlit run app.py
+5. **Handling the API Key:**
+
+   To use the project functionalities that require an API key, you'll need to acquire an API key and place it in a `secrets.toml` file. Here's how you can set it up:
+
+   - Obtain your API key from [API Provider].
+   - Create a `secrets.toml` file in the root directory of your project.
+   - Add your API key to `secrets.toml` in the following format:
+
+     ```toml
+     [api]
+     key = "YOUR_API_KEY_HERE"
+     ```
+
+   Make sure to replace `"YOUR_API_KEY_HERE"` with your actual API key.
+
+
 
 # Project Structure
 - `app.py`: The main Streamlit application.
