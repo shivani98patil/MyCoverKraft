@@ -1,12 +1,25 @@
-# Unit Testing for MyCoverKraft
-
-This Section provides instructions on how to run the unit tests for the MyCoverKraft project.
-
 ## Getting Started
 
 Before running the tests, make sure you have the necessary packages installed. You can install them using pip:
 
+1. Make sure you have Python installed on your system.
+
+2. Create a virtual environment:
+
+python -m venv venv
+
+3. Activate it and install the dependencies:
+
+venv\Scripts\activate
 pip install -r requirements.txt
+
+4. Run the project:
+
+streamlit run app.py
+
+# Unit Testing for MyCoverKraft
+
+This Section provides instructions on how to run the unit tests for the MyCoverKraft project.
 
 ## Running the Tests
 
