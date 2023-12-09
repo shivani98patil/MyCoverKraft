@@ -114,10 +114,10 @@ This use case involves generating a cover letter using the MyCoverKraft applicat
 
 ### Example or Screenshot 
 
-- <img width="1136" alt="Screenshot 2023-12-08 at 10 38 30 PM" src="https://github.com/shivani98patil/MyCoverKraft/assets/142866037/7489a48c-42a9-4aa8-a171-21fd6bef6ca6">
-- <img width="1064" alt="Screenshot 2023-12-08 at 10 38 49 PM" src="https://github.com/shivani98patil/MyCoverKraft/assets/142866037/6be2f8e9-0233-4c31-91bb-e01bc1f60ca1">
-- <img width="1300" alt="Screenshot 2023-12-08 at 10 37 30 PM" src="https://github.com/shivani98patil/MyCoverKraft/assets/142866037/fd561056-b96f-4c9a-ac81-a327538ede42">
-- <img width="1092" alt="Screenshot 2023-12-08 at 10 37 41 PM" src="https://github.com/shivani98patil/MyCoverKraft/assets/142866037/4792c2c7-767d-47fa-af2d-0a675b5e7f83">
+- <img width="800" alt="Screenshot 2023-12-08 at 10 38 30 PM" src="https://github.com/shivani98patil/MyCoverKraft/assets/142866037/7489a48c-42a9-4aa8-a171-21fd6bef6ca6">
+- <img width="800" alt="Screenshot 2023-12-08 at 10 38 49 PM" src="https://github.com/shivani98patil/MyCoverKraft/assets/142866037/6be2f8e9-0233-4c31-91bb-e01bc1f60ca1">
+- <img width="800" alt="Screenshot 2023-12-08 at 10 37 30 PM" src="https://github.com/shivani98patil/MyCoverKraft/assets/142866037/fd561056-b96f-4c9a-ac81-a327538ede42">
+- <img width="800" alt="Screenshot 2023-12-08 at 10 37 41 PM" src="https://github.com/shivani98patil/MyCoverKraft/assets/142866037/4792c2c7-767d-47fa-af2d-0a675b5e7f83">
 
 ## Execution Verification
 
