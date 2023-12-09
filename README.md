@@ -5,13 +5,13 @@ This Section provides instructions on how to run the unit tests for the MyCoverK
 ## Getting Started
 
 Before running the tests, make sure you have the necessary packages installed. You can install them using pip:
-bash
+
 pip install -r requirements.txt
 
 ## Running the Tests
 
 To run the tests, navigate to the directory containing the test file (`test.py`) in your terminal or command prompt, and run the following command:
-bash
+
 python -m unittest test.py
 
 This will run all the test cases defined in `test.py` and print the results to the console. Each test that passes is represented by a dot. If a test fails, it will be represented by an 'F', and an error message will be printed to help you debug the issue.
