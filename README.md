@@ -65,8 +65,8 @@ It ensures you are building the thing, right.
 
 To run the tests, navigate to the directory containing the test file `test.py` in your terminal or command prompt, and run the following command:
 
+     ```python -m unittest test.py```
 
-python -m unittest test.py
 
 
 This command will execute all the test cases defined in `test.py` and display the results in the console. Each passing test will be represented by a dot, while any failed test will be indicated by an 'F', accompanied by an error message for debugging purposes.
