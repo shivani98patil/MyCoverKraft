@@ -11,6 +11,7 @@ python -m venv venv
 3. Activate it and install the dependencies:
 
 venv\Scripts\activate
+
 pip install -r requirements.txt
 
 4. Run the project:
@@ -20,6 +21,13 @@ streamlit run app.py
 # Unit Testing for MyCoverKraft
 
 This Section provides instructions on how to run the unit tests for the MyCoverKraft project.
+
+# Why Unit Test?
+Testing isn't just a suggestion, it's a crucial skill for any developer. It helps you:
+
+Catch bugs early: Identify and fix problems before they reach users. Prevent regressions: Ensure changes don't break existing functionality. Build confidence: Gain trust in your code's quality and stability.
+
+It ensures you are building the thing, right.
 
 ## Running the Tests
 
