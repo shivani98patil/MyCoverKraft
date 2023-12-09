@@ -1,3 +1,18 @@
+# MyCoverKraft
+
+## Introduction
+
+**MyCoverKraft** redefines the process of crafting personalized cover letters for job applications. In today's competitive job market, a compelling cover letter plays a pivotal role in distinguishing candidates. Our application aims to bridge the gap between generic cover letters and context-rich representations of an individual's skills, experiences, and career aspirations.
+
+By harnessing advanced language processing and tailored prompts, **MyCoverKraft** empowers users to generate cover letters that surpass traditional templates. The focus is on understanding the intricate nuances of diverse professions, enabling job seekers to create compelling, personalized cover letters that resonate deeply with potential employers.
+
+From parsing resumes to synthesizing job descriptions, **MyCoverKraft** intelligently amalgamates this information to craft bespoke cover letters, significantly enhancing a candidate's prospects of securing interviews and landing coveted positions. Our tool is poised to streamline the application process, ensuring candidates stand out in a competitive landscape.
+
+## Deployment
+
+The MyCoverKraft application has been deployed and is accessible at [MyCoverKraft Deployment](https://mycoverkraft.streamlit.app/).
+
+
 ## Getting Started
 
 Before running the tests, make sure you have the necessary packages installed. You can install them using pip:
