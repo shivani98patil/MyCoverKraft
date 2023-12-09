@@ -10,7 +10,7 @@ From parsing resumes to synthesizing job descriptions, **MyCoverKraft** intellig
 
 ## Deployment
 
-The MyCoverKraft application has been deployed and is accessible at [MyCoverKraft Deployment](https://mycoverkraft.streamlit.app/).
+The MyCoverKraft application has been deployed and is accessible at [MyCoverKraft](https://mycoverkraft.streamlit.app/).
 
 
 ## Getting Started
