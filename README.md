@@ -40,8 +40,8 @@ Before running the tests, make sure you have the necessary packages installed. Y
    Make sure to replace `"YOUR_API_KEY_HERE"` with your actual API key.
 
 
-
 # Project Structure
+
 - `app.py`: The main Streamlit application.
 - `feedback_data.csv`: Contains all the feedback provided by the user.
 - `requirements.txt`: Contains all the required libraries needed to run this project.
@@ -49,12 +49,15 @@ Before running the tests, make sure you have the necessary packages installed. Y
 
 # Unit Testing for MyCoverKraft
 
-This Section provides instructions on how to run the unit tests for the MyCoverKraft project.
+This section provides instructions on how to run the unit tests for the MyCoverKraft project.
 
-# Why Unit Test?
-Testing isn't just a suggestion, it's a crucial skill for any developer. It helps you:
+## Why Unit Test?
 
-Catch bugs early: Identify and fix problems before they reach users. Prevent regressions: Ensure changes don't break existing functionality. Build confidence: Gain trust in your code's quality and stability.
+Testing isn't just a suggestion; it's a crucial skill for any developer. It helps you:
+
+- Catch bugs early: Identify and fix problems before they reach users.
+- Prevent regressions: Ensure changes don't break existing functionality.
+- Build confidence: Gain trust in your code's quality and stability.
 
 It ensures you are building the thing, right.
 
@@ -64,6 +67,7 @@ To run the tests, navigate to the directory containing the test file (`test.py`)
 
 python -m unittest test.py
 
+
 This will run all the test cases defined in `test.py` and print the results to the console. Each test that passes is represented by a dot. If a test fails, it will be represented by an 'F', and an error message will be printed to help you debug the issue.
 
 ## Test Cases
@@ -71,16 +75,17 @@ This will run all the test cases defined in `test.py` and print the results to t
 The test file includes the following test cases:
 
 1. `test_extract_text_from_pdf`: This test checks if the `extract_text_from_pdf` function correctly extracts text from a PDF file.
-
+   
 2. `test_save_feedback_to_file`: This test checks if the `save_feedback_to_file` function correctly saves feedback to a file.
-
+   
 3. `test_extract_keywords`: This test checks if the `extract_keywords` function correctly extracts keywords from a text.
-
+   
 4. `test_calculate_match`: This test checks if the `calculate_match` function correctly calculates the match percentage between a set of resume keywords and a set of job description keywords.
 
 ## Mocking
 
 The tests use mocking to simulate the behavior of external systems like file I/O operations and PDF reading operations. This allows the tests to run quickly and reliably, without depending on the behavior of these external systems.
+
 
 # Acceptance Testing for MyCoverKraft
 
