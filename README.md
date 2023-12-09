@@ -18,6 +18,12 @@ pip install -r requirements.txt
 
 streamlit run app.py
 
+# Project Structure
+app.py: The main Streamlit application.
+feedback_data.csv: Contains all the feedback provided by the user
+requirements.txt : Contains all the required libraries need to be installed to run this project.
+README.md: This file.
+
 # Unit Testing for MyCoverKraft
 
 This Section provides instructions on how to run the unit tests for the MyCoverKraft project.
