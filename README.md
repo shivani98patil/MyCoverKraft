@@ -106,6 +106,10 @@ The tests use mocking to simulate the behavior of external systems like file I/O
 
 # Acceptance Testing: Generating Cover Letter using MyCoverKraft
 
+## Why Acceptance Testing?
+
+Acceptance testing is a critical phase that validates whether the application meets the specified business requirements and functions as expected in a real-world scenario. It ensures that the generated cover letter aligns with the user's input, job description, and resume details. By performing acceptance testing, potential issues or discrepancies in the cover letter generation process can be identified early, leading to improved application reliability and user satisfaction.
+
 ## Use Case Description
 
 This use case involves generating a cover letter using the MyCoverKraft application.
