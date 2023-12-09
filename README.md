@@ -65,7 +65,7 @@ It ensures you are building the thing, right.
 
 To run the tests, navigate to the directory containing the test file `test.py` in your terminal or command prompt, and run the following command:
 
-     ```python -m unittest test.py```
+     python -m unittest test.py
 
 
 
