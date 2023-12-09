@@ -19,10 +19,10 @@ pip install -r requirements.txt
 streamlit run app.py
 
 # Project Structure
-- (`app.py`): The main Streamlit application.
-- (`feedback_data.csv`): Contains all the feedback provided by the user.
-- (`requirements.txt`): Contains all the required libraries needed to run this project.
-- (`README.md`): This file.
+- `app.py`: The main Streamlit application.
+- `feedback_data.csv`: Contains all the feedback provided by the user.
+- `requirements.txt`: Contains all the required libraries needed to run this project.
+- `README.md`: This file.
 
 # Unit Testing for MyCoverKraft
 
